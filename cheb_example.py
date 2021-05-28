@@ -3,8 +3,8 @@ import argparse
 
 import jittor as jt
 from jittor import nn
-from torch_geometric.datasets import Planetoid
-import torch_geometric.transforms as T
+from jittor_geometric.datasets import Planetoid
+import jittor_geometric.transforms as T
 from jittor_geometric.nn import GCNConv, ChebConv, SGConv, GCN2Conv
 
 jt.flags.use_cuda = 1
@@ -35,8 +35,7 @@ class Net(nn.Module):
         self.conv2 = ChebConv(16, data.num_features, K=2)
 
     def execute(self):
-        x, edge_index, edge_weight = jt.array(data.x.numpy()), jt.array(
-            data.edge_index.numpy()).int32(), data.edge_attr
+        x, edge_index, edge_weight = data.x, data.edge_index, data.edge_attr
         x = nn.relu(self.conv1(x, edge_index, edge_weight))
         x = nn.dropout(x)
         x = self.conv2(x, edge_index, edge_weight)
@@ -52,8 +51,8 @@ optimizer = nn.Adam([
 
 def train():
     model.train()
-    pred = model()[jt.array(data.train_mask.numpy())]
-    label = jt.array(data.y[data.train_mask].numpy())
+    pred = model()[data.train_mask]
+    label = data.y[data.train_mask]
     loss = nn.nll_loss(pred, label)
     optimizer.step(loss)
 
@@ -62,8 +61,8 @@ def test():
     model.eval()
     logits, accs = model(), []
     for _, mask in data('train_mask', 'val_mask', 'test_mask'):
-        y_ = jt.array(data.y[mask].numpy())
-        mask = jt.array(mask.numpy())
+        y_ = data.y[mask]
+        mask = mask
         tmp = []
         for i in range(mask.shape[0]):
             if mask[i] == True:

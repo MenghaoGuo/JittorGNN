@@ -3,8 +3,8 @@ import argparse
 
 import jittor as jt
 from jittor import nn
-from torch_geometric.datasets import Planetoid
-import torch_geometric.transforms as T
+from jittor_geometric.datasets import Planetoid
+import jittor_geometric.transforms as T
 from jittor_geometric.nn import GCNConv, ChebConv, SGConv, GCN2Conv
 
 jt.flags.use_cuda = 1
