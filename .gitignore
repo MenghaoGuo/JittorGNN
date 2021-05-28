@@ -13,7 +13,6 @@ perf.data.old
 *.tgz
 test.py
 extern/mkl/mkldnn_lnx*/*
-data/
 build/
 venv/
 *.md
