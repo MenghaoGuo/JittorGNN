@@ -30,7 +30,7 @@ def get_laplacian(edge_index, edge_weight: Optional[Var] = None,
 
             3. :obj:`"rw"`: Random-walk normalization
             :math:`\mathbf{L} = \mathbf{I} - \mathbf{D}^{-1} \mathbf{A}`
-        dtype (Var.dtype, optional): The desired data type of returned tensor
+        dtype (Var.dtype, optional): The desired data type of returned Var
             in case :obj:`edge_weight=None`. (default: :obj:`None`)
         num_nodes (int, optional): The number of nodes, *i.e.*
             :obj:`max_val + 1` of :attr:`edge_index`. (default: :obj:`None`)

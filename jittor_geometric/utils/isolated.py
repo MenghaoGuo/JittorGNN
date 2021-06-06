@@ -36,7 +36,7 @@ def remove_isolated_nodes(edge_index, edge_attr=None, num_nodes=None):
         num_nodes (int, optional): The number of nodes, *i.e.*
             :obj:`max_val + 1` of :attr:`edge_index`. (default: :obj:`None`)
 
-    :rtype: (Var int32, Tensor, BoolTensor)
+    :rtype: (Var int32, Var, Var bool)
     """
     num_nodes = maybe_num_nodes(edge_index, num_nodes)
 

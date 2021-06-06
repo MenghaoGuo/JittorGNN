@@ -14,15 +14,15 @@ class InMemoryDataset(Dataset):
         root (string, optional): Root directory where the dataset should be
             saved. (default: :obj:`None`)
         transform (callable, optional): A function/transform that takes in an
-            :obj:`torch_geometric.data.Data` object and returns a transformed
+            :obj:`jittor_geometric.data.Data` object and returns a transformed
             version. The data object will be transformed before every access.
             (default: :obj:`None`)
         pre_transform (callable, optional): A function/transform that takes in
-            an :obj:`torch_geometric.data.Data` object and returns a
+            an :obj:`jittor_geometric.data.Data` object and returns a
             transformed version. The data object will be transformed before
             being saved to disk. (default: :obj:`None`)
         pre_filter (callable, optional): A function that takes in an
-            :obj:`torch_geometric.data.Data` object and returns a boolean
+            :obj:`jittor_geometric.data.Data` object and returns a boolean
             value, indicating whether the data object should be included in the
             final dataset. (default: :obj:`None`)
     """

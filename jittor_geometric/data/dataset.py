@@ -178,7 +178,7 @@ class Dataset(dataset.Dataset):
         r"""Gets the data object at index :obj:`idx` and transforms it (in case
         a :obj:`self.transform` is given).
         In case :obj:`idx` is a slicing object, *e.g.*, :obj:`[2:5]`, a list, a
-        tuple, a  LongTensor or a BoolTensor, will return a subset of the
+        tuple, a  Var int32 or a Var bool, will return a subset of the
         dataset at the specified indices."""
         if isinstance(idx, int):
             data = self.get(self.indices()[idx])
@@ -205,7 +205,7 @@ class Dataset(dataset.Dataset):
         else:
             raise IndexError(
                 'Only integers, slices (`:`), list, tuples, and long or bool '
-                'tensors are valid indices (got {}).'.format(
+                'Vars are valid indices (got {}).'.format(
                     type(idx).__name__))
 
         dataset = copy.copy(self)

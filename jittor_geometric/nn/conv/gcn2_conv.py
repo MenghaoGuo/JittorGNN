@@ -35,7 +35,7 @@ class GCN2Conv(MessagePassing):
     connection, while :math:`\beta` models the strength of the identity
     mapping.
     The adjacency matrix can include other values than :obj:`1` representing
-    edge weights via the optional :obj:`edge_weight` tensor.
+    edge weights via the optional :obj:`edge_weight` Var.
     """
 
     _cached_edge_index: Optional[Tuple[Var, Var]]
@@ -89,7 +89,7 @@ class GCN2Conv(MessagePassing):
                         self._cached_edge_index = (edge_index, edge_weight)
                 else:
                     edge_index, edge_weight = cache[0], cache[1]
-        # propagate_type: (x: Tensor, edge_weight: OptTensor)
+        # propagate_type: (x: Var, edge_weight: OptVar)
         x = self.propagate(edge_index, x=x, edge_weight=edge_weight, size=None)
         x.multiply(1 - self.alpha)
         x_0 = self.alpha * x_0[:x.size(0)]

@@ -92,7 +92,7 @@ class Data(object):
 
         if face is not None and face.dtype != Var.int32:
             raise ValueError(
-                (f'Argument `face` needs to be of type `torch.long` but found '
+                (f'Argument `face` needs to be of type `Var int32` but found '
                  f'type `{face.dtype}`.'))
 
         # if jittor_geometric.is_debug_enabled():
@@ -200,7 +200,7 @@ class Data(object):
             inferred, *e.g.*, when node features :obj:`x` are present.
             In some cases however, a graph may only be given by its edge
             indices :obj:`edge_index`.
-            PyTorch Geometric then *guesses* the number of nodes
+            Jittor Geometric then *guesses* the number of nodes
             according to :obj:`edge_index.max().item() + 1`, but in case there
             exists isolated nodes, this number has not to be correct and can
             therefore result in unexpected batch-wise behavior.
@@ -323,7 +323,7 @@ class Data(object):
             return item
 
     def apply(self, func, *keys):
-        r"""Applies the function :obj:`func` to all tensor attributes
+        r"""Applies the function :obj:`func` to all Var attributes
         :obj:`*keys`. If :obj:`*keys` is not given, :obj:`func` is applied to
         all present attributes.
         """
@@ -336,13 +336,6 @@ class Data(object):
         If :obj:`*keys` is not given, all present attributes are ensured to
         have a contiguous memory layout."""
         return self.apply(lambda x: x.contiguous(), *keys)
-
-    def to(self, device, *keys, **kwargs):
-        r"""Performs tensor dtype and/or device conversion to all attributes
-        :obj:`*keys`.
-        If :obj:`*keys` is not given, the conversion is applied to all present
-        attributes."""
-        return self.apply(lambda x: x.to(device, **kwargs), *keys)
 
     def cpu(self, *keys):
         r"""Copies all attributes :obj:`*keys` to CPU memory.

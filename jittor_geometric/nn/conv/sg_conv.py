@@ -20,7 +20,7 @@ class SGConv(MessagePassing):
     adjacency matrix with inserted self-loops and
     :math:`\hat{D}_{ii} = \sum_{j=0} \hat{A}_{ij}` its diagonal degree matrix.
     The adjacency matrix can include other values than :obj:`1` representing
-    edge weights via the optional :obj:`edge_weight` tensor.
+    edge weights via the optional :obj:`edge_weight` Var.
 
     """
 
