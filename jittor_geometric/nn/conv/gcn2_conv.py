@@ -89,15 +89,12 @@ class GCN2Conv(MessagePassing):
                         self._cached_edge_index = (edge_index, edge_weight)
                 else:
                     edge_index, edge_weight = cache[0], cache[1]
-
         # propagate_type: (x: Tensor, edge_weight: OptTensor)
         x = self.propagate(edge_index, x=x, edge_weight=edge_weight, size=None)
-
-        x.mul_(1 - self.alpha)
+        x.multiply(1 - self.alpha)
         x_0 = self.alpha * x_0[:x.size(0)]
-
         if self.weight2 is None:
-            out = x.add_(x_0)
+            out = x.add(x_0)
             out = addmm(out, out, self.weight1, beta=1. - self.beta,
                         alpha=self.beta)
         else:
@@ -105,11 +102,11 @@ class GCN2Conv(MessagePassing):
                         alpha=self.beta)
             out += addmm(x_0, x_0, self.weight2, beta=1. - self.beta,
                          alpha=self.beta)
-
         return out
 
     def message(self, x_j: Var, edge_weight: Var) -> Var:
-        return edge_weight.view(-1, 1) * x_j
+        # return edge_weight.view(-1, 1) * x_jd
+        return x_j if edge_weight is None else edge_weight.view(-1, 1) * x_j
 
     def __repr__(self):
         return '{}({}, alpha={}, beta={})'.format(self.__class__.__name__,
