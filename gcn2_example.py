@@ -27,7 +27,7 @@ class Net(nn.Module):
         for layer in range(num_layers):
             self.convs.append(
                 GCN2Conv(hidden_channels, alpha, theta, layer + 1,
-                         shared_weights, normalize=False))
+                         shared_weights, normalize=True))
 
         self.dropout = dropout
 
