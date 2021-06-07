@@ -1,6 +1,6 @@
 # JittorGNN
 
-#### Example
+### Example
 
 The following methods are currently implemented:
 
@@ -16,7 +16,7 @@ You can run these examples like this:
 python sgc_example.py
 ```
 
-#### Requriments
+### Requriments
 
 [jittor](https://github.com/Jittor/jittor)
 
